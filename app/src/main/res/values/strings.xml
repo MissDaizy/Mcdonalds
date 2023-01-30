@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Mcdonalds</string>
+    <string name="search_menu_items">Search Menu Item</string>
+    <string name="filter_show_all">All</string>
+    <string name="filter_calories">Calories</string>
+    <string name="name">Name</string>
+    <string name="calories">CALORIES</string>
+    <string name="image">image</string>
+</resources>
