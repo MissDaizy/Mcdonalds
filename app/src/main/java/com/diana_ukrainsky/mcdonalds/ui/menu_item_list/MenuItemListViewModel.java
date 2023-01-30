@@ -9,15 +9,13 @@ import androidx.lifecycle.ViewModel;
 import com.diana_ukrainsky.mcdonalds.common.Constants;
 import com.diana_ukrainsky.mcdonalds.data.model.MenuItem;
 import com.diana_ukrainsky.mcdonalds.repository.Repository;
+import com.diana_ukrainsky.mcdonalds.ui.menu_item_details.MenuItemViewModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
-import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
@@ -26,8 +24,8 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 
-@HiltViewModel
 public class MenuItemListViewModel extends ViewModel {
+
     // Variable the Menu Item List
     private MutableLiveData<List<MenuItem>> menuItemLiveData;
     // Variable of the filtered Menu Item List
@@ -37,15 +35,14 @@ public class MenuItemListViewModel extends ViewModel {
     // Variable for hiding and showing the loading spinner
     private MutableLiveData<Boolean> loading;
     private MutableLiveData<String> currentSearchTextLiveData;
-
     private PublishSubject<List<MenuItem>> menuItemsSubject;
     private CompositeDisposable disposables;
     private Repository repository;
     private FilterType selectedFilter;
 
-    @Inject
-    public MenuItemListViewModel(Repository repository) {
-        this.repository = repository;
+
+    public MenuItemListViewModel() {
+        this.repository = Repository.getInstance();
 
         init();
         subscribeSubject();

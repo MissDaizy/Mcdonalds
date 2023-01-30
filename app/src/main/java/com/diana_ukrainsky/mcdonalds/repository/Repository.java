@@ -2,22 +2,25 @@ package com.diana_ukrainsky.mcdonalds.repository;
 
 import com.diana_ukrainsky.mcdonalds.data.model.MenuItem;
 import com.diana_ukrainsky.mcdonalds.data.model.MenuItemDetails;
+import com.diana_ukrainsky.mcdonalds.data.remote.ApiService;
 import com.diana_ukrainsky.mcdonalds.data.remote.JsonApiMenuItem;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import io.reactivex.rxjava3.core.Observable;
 
-@Singleton
 public class Repository {
-    private JsonApiMenuItem jsonApiMenuItem;
+    private static Repository INSTANCE = null;
 
-    @Inject
-    public Repository(JsonApiMenuItem jsonApiMenuItem) {
-        this.jsonApiMenuItem = jsonApiMenuItem;
+    private JsonApiMenuItem jsonApiMenuItem;
+    public static Repository getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new Repository();
+
+        return INSTANCE;
+    }
+    private Repository( ) {
+        this.jsonApiMenuItem = ApiService.getInstance().getJsonApiMenuItem();
     }
 
     public Observable<List<MenuItem>> getAllMenuItems(){

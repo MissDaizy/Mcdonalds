@@ -1,17 +1,17 @@
 package com.diana_ukrainsky.mcdonalds.ui.menu_item_list.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
 
 import com.diana_ukrainsky.mcdonalds.R;
 import com.diana_ukrainsky.mcdonalds.common.Constants;
@@ -26,14 +26,11 @@ import com.diana_ukrainsky.mcdonalds.ui.menu_item_list.FilterType;
 import com.diana_ukrainsky.mcdonalds.ui.menu_item_list.MenuItemListEvent;
 import com.diana_ukrainsky.mcdonalds.ui.menu_item_list.MenuItemListViewModel;
 import com.diana_ukrainsky.mcdonalds.ui.menu_item_list.adapter.MenuItemAdapter;
-import com.diana_ukrainsky.mcdonalds.util.AlertUtil;
 import com.google.gson.Gson;
 
 import java.util.List;
 
-import dagger.hilt.android.AndroidEntryPoint;
 
-@AndroidEntryPoint
 public class MenuItemListActivity extends AppCompatActivity implements LifecycleOwner, CustomItemClickListener {
     private MenuItemListViewModel menuItemListViewModel;
     private MenuItemViewModel menuItemViewModel;

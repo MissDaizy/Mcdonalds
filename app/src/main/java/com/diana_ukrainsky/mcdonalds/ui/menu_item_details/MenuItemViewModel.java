@@ -12,9 +12,6 @@ import com.diana_ukrainsky.mcdonalds.repository.Repository;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
-import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
@@ -23,20 +20,17 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 
-@HiltViewModel
 public class MenuItemViewModel extends ViewModel {
     private MutableLiveData<MenuItemDetails> menuItemDetailsLiveData;
     private MutableLiveData<MenuItem> selectedItem;
-
     private Repository repository;
     private CompositeDisposable disposables;
-
     private PublishSubject<MenuItemDetails> menuItemDetailsSubject;
 
 
-    @Inject
-    public MenuItemViewModel(Repository repository) {
-        this.repository = repository;
+
+    public MenuItemViewModel( ) {
+        this.repository = Repository.getInstance();
 
 
         init();

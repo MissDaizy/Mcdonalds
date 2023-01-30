@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -60,11 +59,6 @@ dependencies {
     // *** Pagination Library **********************************************************
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-
-    // *** Hilt Library **********************************************************
-    implementation "com.google.dagger:hilt-android:2.44.2"
-    annotationProcessor "com.google.dagger:hilt-compiler:2.44"
-    annotationProcessor 'androidx.hilt:hilt-compiler:1.0.0'
 
 
     // *** Room **********************************************************

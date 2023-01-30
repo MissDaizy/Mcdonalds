@@ -14,9 +14,7 @@ import com.diana_ukrainsky.mcdonalds.ui.menu_item_details.MenuItemViewModel;
 import com.diana_ukrainsky.mcdonalds.util.ImageUtil;
 import com.google.gson.Gson;
 
-import dagger.hilt.android.AndroidEntryPoint;
 
-@AndroidEntryPoint
 public class MenuItemDetailsActivity extends AppCompatActivity   {
     private static final int HEIGHT =1000 ;
     private static final int WIDTH =1000 ;
