@@ -26,12 +26,11 @@ import io.reactivex.rxjava3.subjects.PublishSubject;
 
 public class MenuItemListViewModel extends ViewModel {
 
-    // Variable the Menu Item List
+    // Variable the List
     private MutableLiveData<List<MenuItem>> menuItemLiveData;
-    // Variable of the filtered Menu Item List
+    // Variable of the filtered  List
     private MutableLiveData<List<MenuItem>> filteredMenuItemLiveData;
-    // Variable of the Selected Menu Item
-    private MutableLiveData<MenuItem> selectedMenuItem;
+
     // Variable for hiding and showing the loading spinner
     private MutableLiveData<Boolean> loading;
     private MutableLiveData<String> currentSearchTextLiveData;
@@ -51,7 +50,6 @@ public class MenuItemListViewModel extends ViewModel {
     private void init() {
         menuItemLiveData = new MutableLiveData<>();
         filteredMenuItemLiveData = new MutableLiveData<>();
-        selectedMenuItem = new MutableLiveData<>();
         loading = new MutableLiveData<>();
         currentSearchTextLiveData = new MutableLiveData<>("");
 
@@ -76,10 +74,6 @@ public class MenuItemListViewModel extends ViewModel {
 
     public MutableLiveData<List<MenuItem>> getFilteredMenuItemLiveData() {
         return filteredMenuItemLiveData;
-    }
-
-    public MutableLiveData<MenuItem> getSelectedMenuItem() {
-        return selectedMenuItem;
     }
 
     public MutableLiveData<Boolean> getLoading() {
@@ -157,22 +151,20 @@ public class MenuItemListViewModel extends ViewModel {
         switch (selectedFilter) {
             case ALL:
                 currentSearchTextLiveData.setValue("");
-                filteredMenuItemLiveData.setValue(menuItemLiveData.getValue());
+                filteredMenuItems=menuItemLiveData.getValue();
                 break;
             case ASC_CALORIES:
                 Collections.sort(filteredMenuItems, new MenuItem.SortByCalories().reversed());
-                filteredMenuItemLiveData.setValue(filteredMenuItems);
                 break;
             case DESC_CALORIES:
                 Collections.sort(filteredMenuItems, new MenuItem.SortByCalories());
-                filteredMenuItemLiveData.setValue(filteredMenuItems);
                 break;
             case NAME:
                 Collections.sort(filteredMenuItems, new MenuItem.SortByTitle());
-                filteredMenuItemLiveData.setValue(filteredMenuItems);
                 break;
         }
-    }
+            filteredMenuItemLiveData.setValue(filteredMenuItems);
+        }
     public void disposeComposite() {
         disposables.dispose();
     }

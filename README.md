@@ -54,6 +54,12 @@ step 2 - Add ViewBinding:
     }
 ```
 
+Step 3 - Add internet permission to Manifest:
+```java harmony
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
 step 4 - Add keys to keymap :
 
 ```raw
@@ -225,12 +231,87 @@ step 6 -
 
 ```
  
+ 
+step 7 - Create object_list_item:
 
-step 7 - 
+```xml harmony
+    <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menuListItem_CV_menuItemCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
-(7.1) Create *object_details* -> **activity** -> **ObjectDetailsActivity**.
+        <LinearLayout
+            android:id="@+id/list_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-(7.2) in activity_object_details:
+            <TextView
+                android:id="@+id/menuListItem_TXT_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/menuListItem_IMG_recipeImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_no_image" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/menuListItem_TXT_caloriesPreview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Calories:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/menuListItem_TXT_calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/calories"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+```
+
+
+step 8 - 
+
+(8.1) Create *object_details* -> **activity** -> **ObjectDetailsActivity**.
+
+(8.2) in activity_object_details:
 ```xml harmony
     <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
@@ -313,92 +394,31 @@ step 7 -
 </LinearLayout>
 ```
 
-step 7 - Create object_list_item:
 
-```xml harmony
-    <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/menuListItem_CV_menuItemCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp">
+Step 9 - Look at the JSON and build models in **data** -> **model**.
+Be aware of the Types!!! 
 
-        <LinearLayout
-            android:id="@+id/list_item_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+<u>If the detailed object has same parameteres as the original object create a combined object with all parameters(8.1 + 8.2 in one class) </u>
 
-            <TextView
-                android:id="@+id/menuListItem_TXT_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/name"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/menuListItem_IMG_recipeImage"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:contentDescription="@string/image"
-                android:src="@drawable/ic_no_image" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/menuListItem_TXT_caloriesPreview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Calories:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-                <TextView
-                    android:id="@+id/menuListItem_TXT_calories"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/calories"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
-```
-
-Step 8 - Look at the JSON and build models in **data** -> **model**.
-Be aware of the Types!!!
-
-(8.1)  **ObjectItem** with sorting parameters:
+(9.1)  **ObjectItem** with sorting parameters and <u>override equals</u>:
 
 ```java harmony
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj!=null) {
+            MenuItem menuItem=(MenuItem) obj;
+            return Objects.equals(id, menuItem.getId());
+        }
+        return false;
+    }
+
     public static class SortByTitle implements Comparator<MenuItem> {
         // Used for sorting title
         public int compare(MenuItem m1, MenuItem m2) {
             return m1.getItem().compareTo(m2.getItem());
         }
     }
+
     public static class SortByCalories implements Comparator<MenuItem> {
         // Used for sorting in ascending order of
         // roll number
@@ -410,9 +430,10 @@ Be aware of the Types!!!
 ```
 
 
-(8.2) **ObjectDetails**
+(9.2) **ObjectDetails**
 
- Step 9 - Create **common** -> **Constants**:
+
+ Step 10 - Create **common** -> **Constants**:
 
 ```java harmony
    public class Constants {
@@ -427,7 +448,7 @@ Be aware of the Types!!!
 
 Step 9 - Create *data* -> **remote** ->
 
-(9.1) **JsonApiObject**:
+(10.1) **JsonApiObject**:
 ```java harmony
 public interface JsonApiMenuItem {
     // The List of menu items
@@ -443,7 +464,7 @@ public interface JsonApiMenuItem {
 
 ```
 
-(9.2) **ApiService**:
+(10.2) **ApiService**:
 
 ```java harmony
 public class ApiService {
@@ -477,7 +498,7 @@ public class ApiService {
 
 ```
 
-Step 10 - Create **repository** -> **Repository**:
+Step 11 - Create **repository** -> **Repository**:
 
 ```java harmony
 public class Repository {
@@ -504,7 +525,7 @@ public class Repository {
 
 ```
 
-Step 11 - Create **util** -> **ImageUtil**:
+Step 12 - Create **util** -> **ImageUtil**:
 
 ```java harmony
 public class ImageUtil {
@@ -518,9 +539,9 @@ public class ImageUtil {
 
 ```
 
-Step 12 - Create *ui* -> **callback** ->
+Step 13 - Create *ui* -> **callback** ->
 
-(12.1) 🟢**CustomItemClickListener**:
+(13.1) 🟢**CustomItemClickListener**:
 
 ```java harmony
 public interface CustomItemClickListener {
@@ -529,7 +550,7 @@ public interface CustomItemClickListener {
 
 ```
 
-(12.2) **ObjectDiffCallback**:
+(13.2) **ObjectDiffCallback**:
 
 ```java harmony
 public class MenuItemDiffCallback extends DiffUtil.Callback {
@@ -574,9 +595,9 @@ public class MenuItemDiffCallback extends DiffUtil.Callback {
 
 ```
 
-Step 13 - In *ui* -> *object_item_list* ->
+Step 14 - In *ui* -> *object_item_list* ->
 
-(13.1) Create **FilterType**:
+(14.1) Create **FilterType**:
 
 ```java harmony
 public enum FilterType {
@@ -584,7 +605,7 @@ public enum FilterType {
 }
 ```
 
-(13.2) Create **ObjectListEvent**:
+(14.2) Create **ObjectListEvent**:
 ```java harmony
 public enum MenuItemListEvent {
     FILTER_LIST,ITEM_CLICKED,SEARCH
@@ -592,7 +613,7 @@ public enum MenuItemListEvent {
 
 ```
 
-Step 14 - Create *ui* -> *object_item_list* -> **adapter** -> **ObjectAdapter**:
+Step 15 - Create *ui* -> *object_item_list* -> **adapter** -> **ObjectAdapter**:
 
 ```java harmony
 public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -662,17 +683,16 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 ```
 
-Step 15 - Create *ui* -> *object_item_list* -> **ObjectItemListViewModel**:
+Step 16 - Create *ui* -> *object_item_list* -> **ObjectItemListViewModel**:
 
 ```java harmony
 public class MenuItemListViewModel extends ViewModel {
 
-    // Variable the Menu Item List
+    // Variable the List
     private MutableLiveData<List<MenuItem>> menuItemLiveData;
-    // Variable of the filtered Menu Item List
+    // Variable of the filtered  List
     private MutableLiveData<List<MenuItem>> filteredMenuItemLiveData;
-    // Variable of the Selected Menu Item
-    private MutableLiveData<MenuItem> selectedMenuItem;
+
     // Variable for hiding and showing the loading spinner
     private MutableLiveData<Boolean> loading;
     private MutableLiveData<String> currentSearchTextLiveData;
@@ -692,7 +712,6 @@ public class MenuItemListViewModel extends ViewModel {
     private void init() {
         menuItemLiveData = new MutableLiveData<>();
         filteredMenuItemLiveData = new MutableLiveData<>();
-        selectedMenuItem = new MutableLiveData<>();
         loading = new MutableLiveData<>();
         currentSearchTextLiveData = new MutableLiveData<>("");
 
@@ -717,10 +736,6 @@ public class MenuItemListViewModel extends ViewModel {
 
     public MutableLiveData<List<MenuItem>> getFilteredMenuItemLiveData() {
         return filteredMenuItemLiveData;
-    }
-
-    public MutableLiveData<MenuItem> getSelectedMenuItem() {
-        return selectedMenuItem;
     }
 
     public MutableLiveData<Boolean> getLoading() {
@@ -798,22 +813,20 @@ public class MenuItemListViewModel extends ViewModel {
         switch (selectedFilter) {
             case ALL:
                 currentSearchTextLiveData.setValue("");
-                filteredMenuItemLiveData.setValue(menuItemLiveData.getValue());
+                filteredMenuItems=menuItemLiveData.getValue();
                 break;
             case ASC_CALORIES:
                 Collections.sort(filteredMenuItems, new MenuItem.SortByCalories().reversed());
-                filteredMenuItemLiveData.setValue(filteredMenuItems);
                 break;
             case DESC_CALORIES:
                 Collections.sort(filteredMenuItems, new MenuItem.SortByCalories());
-                filteredMenuItemLiveData.setValue(filteredMenuItems);
                 break;
             case NAME:
                 Collections.sort(filteredMenuItems, new MenuItem.SortByTitle());
-                filteredMenuItemLiveData.setValue(filteredMenuItems);
                 break;
         }
-    }
+            filteredMenuItemLiveData.setValue(filteredMenuItems);
+        }
     public void disposeComposite() {
         disposables.dispose();
     }
@@ -831,75 +844,173 @@ public class MenuItemListViewModel extends ViewModel {
         }
     }
 }
-
 ```
 
-Step 16 - In *ui* -> *object_item_list* -> *activity* -> *ObjectListActivity*:
+Step 17 - In *ui* -> *object_item_list* -> *activity* -> *ObjectListActivity*:
 
 ```java harmony
-public class MenuItemDetailsActivity extends AppCompatActivity   {
-    private static final int HEIGHT =1000 ;
-    private static final int WIDTH =1000 ;
+public class MenuItemListActivity extends AppCompatActivity implements LifecycleOwner, CustomItemClickListener {
+    private MenuItemListViewModel menuItemListViewModel;
     private MenuItemViewModel menuItemViewModel;
+    private RecyclerView recyclerView;
+    private MenuItemAdapter menuItemAdapter;
+    private ProgressBar progressBar;
 
-    private ActivityMenuItemDetailsBinding activityMenuItemDetailsBinding;
-
+    private ActivityMenuItemListBinding activityMenuItemListBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_item_details);
+        setContentView(R.layout.activity_menu_item_list);
 
-        activityMenuItemDetailsBinding = ActivityMenuItemDetailsBinding.inflate(getLayoutInflater());
-        View view = activityMenuItemDetailsBinding.getRoot();
+        activityMenuItemListBinding = ActivityMenuItemListBinding.inflate(getLayoutInflater());
+        View view = activityMenuItemListBinding.getRoot();
         setContentView(view);
 
-        setUI();
+        setViewModels();
+        setObservers();
+
+        setViews();
+        setListeners();
+        setRecyclerView();
+        setAdapter();
+        setMenuItemListUI();
     }
 
-    private void setUI() {
-        MenuItem menuItem=getItemData();
-        MenuItemDetails menuItemDetails = getItemDetails();
-        setMenuItemUI(menuItem);
-        setMenuItemDetailsUI(menuItemDetails);
+    private void setViewModels() {
+        menuItemListViewModel = new ViewModelProvider(this).get(MenuItemListViewModel.class);
+        menuItemViewModel = new ViewModelProvider(this).get(MenuItemViewModel.class);
     }
 
-    private MenuItem getItemData() {
-        Bundle bundle = getIntent ().getExtras ();
-        String selectedItemJson = bundle.getString (Constants.SELECTED_ITEM);
-        MenuItem selectedItem = new Gson().fromJson (selectedItemJson, MenuItem.class);
-        return  selectedItem;
+    private void setObservers() {
+        menuItemListViewModel.getMenuItemLiveData().observe(this,menuItemListUpdateObserver);
+        menuItemListViewModel.getFilteredMenuItemLiveData().observe(this,filteredMenuItemListUpdateObserver);
+        menuItemViewModel.getMenuItemDetailsLiveData().observe(this,menuItemDetailsObserver);
+        menuItemListViewModel.getCurrentSearchTextLiveData().observe(this,searchTextObserver);
+        menuItemListViewModel.getLoading().observe(this, loadingObserver);
     }
 
-    private MenuItemDetails getItemDetails() {
-        Bundle bundle = getIntent ().getExtras ();
-        String itemDetailsJson = bundle.getString (Constants.ITEM_DETAILS);
-        MenuItemDetails menuItemDetails = new Gson().fromJson (itemDetailsJson, MenuItemDetails.class);
-        return menuItemDetails;
+    Observer<List<MenuItem>> menuItemListUpdateObserver = new Observer<List<MenuItem>>() {
+        @Override
+        public void onChanged(List<MenuItem> menuItemList) {
+            menuItemAdapter.updateRecipeListItems(menuItemList);
+        }
+    };
+
+    Observer<List<MenuItem>> filteredMenuItemListUpdateObserver = new Observer<List<MenuItem>>() {
+        @Override
+        public void onChanged(List<MenuItem> filteredMenuItems) {
+            menuItemAdapter.updateRecipeListItems(filteredMenuItems);
+        }
+    };
+
+    Observer<MenuItemDetails> menuItemDetailsObserver = new Observer<MenuItemDetails>() {
+        @Override
+        public void onChanged(MenuItemDetails menuItemDetails) {
+            // Item with Details is ready
+            startMenuItemActivity();
+        }
+    };
+
+    Observer<String> searchTextObserver = new Observer<String>() {
+        @Override
+        public void onChanged(String searchText) {
+            activityMenuItemListBinding.activityMenuItemListSVSearchView.setQuery(searchText,false);
+        }
+    };
+    Observer<Boolean> loadingObserver = new Observer<Boolean>() {
+        @Override
+        public void onChanged(Boolean isLoading) {
+            if (isLoading) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+            else {
+                progressBar.setVisibility(View.GONE);
+            }
+        }
+    };
+    private void setViews() {
+        progressBar = activityMenuItemListBinding.activityMenuItemListPBProgressBar;
     }
 
-    private void setMenuItemUI(MenuItem selectedItem) {
-        activityMenuItemDetailsBinding.recipeListItemTXTTitle.setText(selectedItem.getItem());
+    private void setMenuItemListUI() {
+        menuItemListViewModel.getMenuItems();
     }
 
-    private void setMenuItemDetailsUI(MenuItemDetails menuItemDetails) {
-        activityMenuItemDetailsBinding.fragmentRecipeDetailsTXTDescription.setText(menuItemDetails.getDescription());
-        setImageUI(menuItemDetails.getImageUrl());
+    private void setAdapter() {
+        menuItemAdapter = new MenuItemAdapter(this);
+        recyclerView.setAdapter(menuItemAdapter);
     }
 
-    private void setImageUI(String imageUrl) {
-        ImageUtil.setImage(this,imageUrl,activityMenuItemDetailsBinding.recipeListItemIMGRecipeImage,WIDTH,HEIGHT);
+    private void setRecyclerView() {
+        recyclerView = activityMenuItemListBinding.activityMenuItemListRVRecyclerView;
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    private void setListeners() {
+        setFilterButtonsListeners();
+        activityMenuItemListBinding.activityMenuItemListSVSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                menuItemListViewModel.onEventMenuItemList(MenuItemListEvent.SEARCH,newText);
+                return true;
+            }
+        });
+    }
+    private void setFilterButtonsListeners() {
+        activityMenuItemListBinding.activityMenuItemListBTNAllFilter.setOnClickListener(v -> {
+            menuItemListViewModel.onEventMenuItemList(MenuItemListEvent.FILTER_LIST, FilterType.ALL);
+        });
+        activityMenuItemListBinding.activityMenuItemListBTNAscCaloriesFilter.setOnClickListener(v -> {
+            menuItemListViewModel.onEventMenuItemList(MenuItemListEvent.FILTER_LIST, FilterType.ASC_CALORIES);
+        });
+        activityMenuItemListBinding.activityMenuItemListBTNDescCaloriesFilter.setOnClickListener(v -> {
+            menuItemListViewModel.onEventMenuItemList(MenuItemListEvent.FILTER_LIST, FilterType.DESC_CALORIES);
+        });
+        activityMenuItemListBinding.activityMenuItemListBTNTitleFilter.setOnClickListener(v -> {
+            menuItemListViewModel.onEventMenuItemList(MenuItemListEvent.FILTER_LIST, FilterType.NAME);
+        });
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+    public void onClick (Object object){
+        menuItemViewModel
+                .onEventRecipeList(
+                        MenuItemEvent.GET_MENU_ITEM_DETAILS,
+                        object
+                );
+    }
+
+    private void startMenuItemActivity() {
+        String selectedItemJson = new Gson().toJson (menuItemViewModel.getSelectedItem().getValue());
+        String itemDetailsJson = new Gson().toJson (menuItemViewModel.getMenuItemDetailsLiveData().getValue());
+        Intent intent = new Intent(this, MenuItemDetailsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle bundle = new Bundle ();
+        bundle.putString(Constants.SELECTED_ITEM,selectedItemJson);
+        bundle.putString(Constants.ITEM_DETAILS,itemDetailsJson);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDestroy () {
+        super.onDestroy();
+        // Destroy composite when fragment is destroyed.
+        menuItemListViewModel.disposeComposite();
     }
 }
 
 ```
 
-Step 17 - Create *ui* -> *object_details* -> **ObjectItemEvent**:
+Step 18 - Create *ui* -> *object_details* -> **ObjectItemEvent**:
 
 ```java harmony
 public enum MenuItemEvent {
@@ -908,7 +1019,7 @@ public enum MenuItemEvent {
 
 ```
 
-Step 18 - Create *ui* -> *object_details* -> **ObjectItemViewModel**:
+Step 19 - Create *ui* -> *object_details* -> **ObjectItemViewModel**:
 
 ```java harmony
 public class MenuItemViewModel extends ViewModel {
@@ -1002,14 +1113,12 @@ public class MenuItemViewModel extends ViewModel {
 
 ```
 
-Step 19 - Create *ui* -> *object_details* -> *activity* -> **ObjectItemDetailsActivity**:
+Step 20 - Create *ui* -> *object_details* -> *activity* -> **ObjectItemDetailsActivity**:
 
 ```java harmony
 public class MenuItemDetailsActivity extends AppCompatActivity   {
     private static final int HEIGHT =1000 ;
     private static final int WIDTH =1000 ;
-    private MenuItemViewModel menuItemViewModel;
-
     private ActivityMenuItemDetailsBinding activityMenuItemDetailsBinding;
 
     @Override
@@ -1064,10 +1173,9 @@ public class MenuItemDetailsActivity extends AppCompatActivity   {
         finish();
     }
 }
-
 ```
 
-Step 20 - 
+Step 21 - 
 
 Implement searching and filtering.
 

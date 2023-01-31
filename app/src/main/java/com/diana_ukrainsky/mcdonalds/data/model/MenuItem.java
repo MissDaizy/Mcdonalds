@@ -1,8 +1,11 @@
 package com.diana_ukrainsky.mcdonalds.data.model;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 public class MenuItem {
     @SerializedName("id")
@@ -258,6 +261,16 @@ public class MenuItem {
     public void setIron(int iron) {
         this.iron = iron;
     }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj!=null) {
+            MenuItem menuItem=(MenuItem) obj;
+            return Objects.equals(id, menuItem.getId());
+        }
+        return false;
+    }
+
     public static class SortByTitle implements Comparator<MenuItem> {
         // Used for sorting title
         public int compare(MenuItem m1, MenuItem m2) {
